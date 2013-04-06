@@ -3,11 +3,13 @@ function dumpStats(stats) {
         this.genCount = 0;
     }
     this.genCount += stats.genCount;
-    console.log("stopped after " + stats.genCount + " generations, " + this.genCount + "  generations total");
+    var d = $("<div>");
+    d.html("stopped after " + stats.genCount + " generations, " + this.genCount + "  generations total");
+    $("#stats").append(d);
 }
 
 function dumpWorld(cells) {
-    console.log(cells.join(", "));
+    $("#gol").html(cells.join(", "));
 }
 
 function init() {

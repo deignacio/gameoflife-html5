@@ -5,16 +5,15 @@
 #intro {
 
 }
-
+#stats {
+	overflow: scroll;
+	height: 150px;
+}
 #gol {
 	overflow: hidden;
-	height: 550px;
+	height: 350px;
 }
 
-#footer {
-
-}
-
-#actions {
-
+body {
+	padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
 }
