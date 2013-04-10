@@ -10,16 +10,24 @@ function dumpWorld(cells) {
     setMsg("gol", cells);
 }
 
-function init() {
+function startWorld(data) {
+    if (this.running) {
+        appendMsg("stats", "already running, ignoring start request");
+        return;
+    } else {
+        this.running = true;
+    }
     var runLineage = true;
     var gol = null;
     var cells = [];
     var stats = {};
     var killLineageId = -1;
     var generationId = -1;
+    var maxLineageRuntime = 10000;
+    var maxWorldRuntime = 30000;
     var oneLineage = function(size) {
         killLineageId = setTimeout(function() {
-            appendMsg("stats", "lineage short circuited");
+            appendMsg("stats", "killing, most likely found a cycle");
             if (generationId != -1) {
                 clearTimeout(generationId);
             }
@@ -27,7 +35,7 @@ function init() {
                 dumpStats(stats);
                 oneLineage(size);
             }
-        }, 2500);
+        }, maxLineageRuntime);
         gol = new GameOfLife({"size": size});
         cells = [];
         stats = {"genCount": 0, "cellCount": cells.length};
@@ -60,9 +68,21 @@ function init() {
     setTimeout(function() {
         runLineage = false;
         appendMsg("stats", "stopping");
-    }, 10000);
+        this.running = false;
+    }, maxWorldRuntime);
 
-    oneLineage("small");
+    var dataset = bubbleUpToClass(data.target, "gol-start").dataset;
+    if (!dataset || !("worldSize" in dataset)) {
+        oneLineage("small");
+    } else {
+        oneLineage(dataset.worldSize);
+    }
 }
 
+function init() {
+    var sizes = document.getElementsByClassName("gol-start");
+    for (var i = 0; i < sizes.length; i++) {
+        sizes[i].addEventListener("click", startWorld);
+    }
+}
 window.onload = init;
