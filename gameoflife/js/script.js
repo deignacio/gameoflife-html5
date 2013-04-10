@@ -6,10 +6,6 @@ function dumpStats(stats) {
     appendMsg("stats", "stopped after " + stats.genCount + " generations, " + this.genCount + "  generations total");
 }
 
-function dumpWorld(cells) {
-    setMsg("gol", cells);
-}
-
 function startWorld(data) {
     if (this.running) {
         appendMsg("stats", "already running, ignoring start request");
@@ -19,8 +15,8 @@ function startWorld(data) {
     }
     var runLineage = true;
     var gol = null;
-    var cells = [];
     var stats = {};
+    var renderer = null;
     var killLineageId = -1;
     var generationId = -1;
     var maxLineageRuntime = 10000;
@@ -37,19 +33,15 @@ function startWorld(data) {
             }
         }, maxLineageRuntime);
         gol = new GameOfLife({"size": size});
-        cells = [];
-        stats = {"genCount": 0, "cellCount": cells.length};
+        renderer = new TextDumpWorldRenderer({"world": gol, "divId": "gol"});
+        stats = {"genCount": 0, "cellCount": gol.populationSize};
         var oneGeneration = function() {
             gol.nextGeneration();
-            gol.dumpGeneration(function(val, x, y) {
-                cells.push("(" + x + ", " + y + ")");
-            });
-            dumpWorld(cells);
+            renderer.render();
             stats.genCount++;
-            stats.cellCount = cells.length;
+            stats.cellCount = gol.populationSize;
             if (runLineage) {
-                if (cells.length > 0) {
-                    cells = [];
+                if (gol.populationSize > 0) {
                     generationId = setTimeout(oneGeneration, 0);
                 } else {
                     if (killLineageId != -1) {

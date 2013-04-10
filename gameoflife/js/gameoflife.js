@@ -22,10 +22,10 @@ GameOfLife.prototype = {
 
         this._resetRows();
         this._resetNeighbors();
-        this._size = ("size" in args) ? args.size : "medium";
-        this._height = GameOfLifeSizes[this._size].height;
-        this._width = GameOfLifeSizes[this._size].width;
-        this._cellCount = this._height * this._width;
+        this.size = ("size" in args) ? args.size : "medium";
+        this.height = GameOfLifeSizes[this.size].height;
+        this.width = GameOfLifeSizes[this.size].width;
+        this._cellCount = this.height * this.width;
         this._initialProbability = ("initialProbability" in args) ? args.initialProbability : "average";
         var initialProbability = GameOfLifeProbabilities[this._initialProbability];
         this._randomize(initialProbability);
@@ -35,7 +35,7 @@ GameOfLife.prototype = {
     _resetRows: function() {
         this._rows = [];
         var i;
-        for (i = 0; i < this._height; i++) {
+        for (i = 0; i < this.height; i++) {
             this._rows[i] = [];
         }
     },
@@ -43,7 +43,7 @@ GameOfLife.prototype = {
     _resetNeighbors: function() {
         this._neighbors = [];
         var i;
-        for (i = 0; i < this._height; i++) {
+        for (i = 0; i < this.height; i++) {
             this._neighbors[i] = [];
         }
     },
@@ -51,10 +51,10 @@ GameOfLife.prototype = {
     _randomize: function(initialProbability) {
         var i;
         var j;
-        for (i = 0; i < this._height; i++) {
+        for (i = 0; i < this.height; i++) {
             this._rows[i] = [];
             this._neighbors[i] = [];
-            for (j = 0; j < this._width; j++) {
+            for (j = 0; j < this.width; j++) {
                 if (Math.random() > initialProbability) {
                     this._rows[i][j] = 1;
                 }
@@ -63,6 +63,7 @@ GameOfLife.prototype = {
     },
 
     nextGeneration: function() {
+        this.populationSize = 0;
         this._resetNeighbors();
         this._doForAll(this._rows, this._impactCellNeighbors);
         this._resetRows();
@@ -101,14 +102,14 @@ GameOfLife.prototype = {
 
     _getLeft: function(x) {
         if (x == 0) {
-            return this._width - 1;
+            return this.width - 1;
         }
         return x - 1;
     },
 
     _getRight: function(x) {
         x++;
-        if (x == this._width) {
+        if (x == this.width) {
             return 0;
         }
         return x;
@@ -116,14 +117,14 @@ GameOfLife.prototype = {
 
     _getUp: function(y) {
         if (y == 0) {
-            return this._height - 1;
+            return this.height - 1;
         }
         return y - 1;
     },
 
     _getDown: function(y) {
         y++;
-        if (y == this._height) {
+        if (y == this.height) {
             return 0;
         }
         return y;
@@ -139,6 +140,7 @@ GameOfLife.prototype = {
     _impactFitness: function(cell, x, y) {
         if (cell > 3 && cell < 6) {
             this._rows[y][x] = 1;
+            this.populationSize++;
         }
     },
 
@@ -148,4 +150,3 @@ GameOfLife.prototype = {
         this._doForAll(this._rows, cellFunc);
     }
 };
-
