@@ -20,40 +20,43 @@
                     <a class="brand" href="#">game of life</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">World Size <b class="caret"></b></a>
-                                <ul id="actions" class="dropdown-menu">
-                                    <li><a href="#">small <small>(15x15)</small></a></li>
-                                    <li><a href="#">medium <small>(50x50)</small></a></li>
-                                    <li><a href="#">large <small>(150x150)</small></a></li>
-                                    <li><a href="#">xlarge <small>(250x250)</small></a></li>
-                                </ul>
-                            </li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
         </div>
 
-        <div class="container">
-            <div id="header">
-                <h2>gol<small>: game of life</small></h2>
+        <div id="header" class="container">
+            <div class="row span12">
+                <div class="span6">
+                    <h2>gol<small>: game of life</small></h2>
+                    <div id="intro">
+                        <ul>
+                            <li>you can't survive on your own</li>
+                            <li>too many neighbors and you can't support everyone</li>
+                            <li>just get by with a little help from your friends</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="span4">
+                    <h4> world sizes </h4>
+                    <button class="gol-start btn btn-info" data-worldsize="small">small <small>(15x15)</small></button>
+                    <button class="gol-start btn btn-info" data-world-size="medium">medium <small>(50x50)</small></button>
+                    <button class="gol-start btn btn-info" data-world-size="large">large <small>(150x150)</small></button>
+                    <button class="gol-start btn btn-info" data-world-size="xlarge">xlarge <small>(250x250)</small></button>
+                </div>
             </div>
-            <div id="intro">
-                <ul>
-                    <li>you can't survive on your own</li>
-                    <li>too many neighbors and you can't support everyone</li>
-                    <li>just get by with a little help from your friends</li>
-                </ul>
-            </div>
-            <div id="gol" class="alert alert-info"></div>
-            <div id="stats" class="alert alert-warning"></div>
+        </div>
+        <div id="gol-container" class="container">
+            <div id="gol" class="row alert alert-info"></div>
+        </div>
+        <div id="footer" class="container">
+            <div id="stats" class="row alert alert-warning"></div>
         </div>
 
         <!-- end of the content, add scripts -->
+        <script src="js/helpers.js"></script>
         <script src="js/gameoflife.js"></script>
         <script src="js/script.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
     </body>
 </html>

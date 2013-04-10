@@ -3,13 +3,11 @@ function dumpStats(stats) {
         this.genCount = 0;
     }
     this.genCount += stats.genCount;
-    var d = $("<div>");
-    d.html("stopped after " + stats.genCount + " generations, " + this.genCount + "  generations total");
-    $("#stats").append(d);
+    appendMsg("stats", "stopped after " + stats.genCount + " generations, " + this.genCount + "  generations total");
 }
 
 function dumpWorld(cells) {
-    $("#gol").html(cells.join(", "));
+    setMsg("gol", cells);
 }
 
 function init() {
@@ -21,7 +19,7 @@ function init() {
     var generationId = -1;
     var oneLineage = function(size) {
         killLineageId = setTimeout(function() {
-            console.log("lineage short circuited");
+            appendMsg("stats", "lineage short circuited");
             if (generationId != -1) {
                 clearTimeout(generationId);
             }
@@ -53,7 +51,7 @@ function init() {
                     oneLineage(size);
                 }
             } else {
-                console.log("simulation short circuited");
+                appendMsg("stats", "simulation short circuited");
                 dumpStats(stats);
             }
         }
@@ -61,7 +59,7 @@ function init() {
     }
     setTimeout(function() {
         runLineage = false;
-        console.log("stopping");
+        appendMsg("stats", "stopping");
     }, 10000);
 
     oneLineage("small");
