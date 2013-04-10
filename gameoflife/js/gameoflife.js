@@ -1,8 +1,8 @@
 var GameOfLifeSizes = {
-    "small": {"height": 15, "width": 15},
-    "medium": {"height": 50, "width": 50},
-    "large": {"height": 150, "width": 150},
-    "xlarge": {"height": 250, "width": 250},
+    "small": {"height": 16, "width": 16},
+    "medium": {"height": 64, "width": 64},
+    "large": {"height": 128, "width": 128},
+    "xlarge": {"height": 256, "width": 256},
 }
 
 var GameOfLifeProbabilities = {
