@@ -6,10 +6,10 @@ define(function() {
     WorldRenderer.prototype = {
         _init: function(args) {
             args = args || {};
-            if (!("world" in args)) {
+            if (!("world" in args) || !("parent" in args)) {
                 return;
             }
-            this._divId = args.divId || "gol";
+            this._parent = args.parent;
             this._gol = args.world;
             this._initialize();
         },
@@ -27,8 +27,7 @@ define(function() {
 
         _preRender: function() {},
         _renderCell: function(val, x, y) {},
-        _postRender: function() {},
-        clear: function() {}
+        _postRender: function() {}
     };
     return WorldRenderer;
 });

@@ -6,15 +6,10 @@ define(function(require) {
     CanvasWorldRenderer.prototype = new WorldRenderer();
     CanvasWorldRenderer.prototype._initialize = function() {
         var canvas = document.createElement("canvas");
-        var me = this;
-        canvas.onclick = function() {
-            me._gol.initialize();
-        };
         canvas.width = 640;
         canvas.height = 640;
         this._cwidth = canvas.width / this._gol.width;
         this._cheight = canvas.height / this._gol.height;
-        this._parent = document.getElementById(this._divId) || document.body;
         this._parent.appendChild(canvas);
         this._canvas = canvas;
         this._ctx = canvas.getContext('2d');
@@ -38,11 +33,6 @@ define(function(require) {
         this._ctx.fillStyle = "teal";
         this._ctx.fill();
         this._ctx.restore();
-    };
-    CanvasWorldRenderer.prototype.clear = function() {
-        this._parent.removeChild(this._canvas);
-        this._canvas = null;
-        this._ctx = null;
     };
     return CanvasWorldRenderer;
 });

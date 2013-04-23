@@ -1,5 +1,6 @@
-requirejs(['canvasrenderer', 'world'],
-function (CanvasWorldRenderer, startWorld) {
+requirejs(['world'],
+function (startWorld) {
     console.log("ludei_init");
-    startWorld("large", CanvasWorldRenderer);
+    var parent = document.getElementById("gol") || document.body;
+    startWorld("large", parent);
 });
