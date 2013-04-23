@@ -82,3 +82,11 @@ function init() {
         sizes[i].addEventListener("click", startWorldDom);
     }
 }
+
+function ludei_init() {
+    var worldSize = "large";
+    var createRenderer = function(args) {
+        return new CanvasWorldRenderer(args);
+    };
+    startWorld(worldSize, createRenderer);
+}

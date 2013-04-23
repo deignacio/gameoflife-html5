@@ -53,3 +53,50 @@ TextDumpWorldRenderer.prototype._postRender = function() {
 TextDumpWorldRenderer.prototype.clear = function() {
     this._cells = [];
 }
+
+function CanvasWorldRenderer(args) {
+    this._init(args);
+}
+CanvasWorldRenderer.prototype = WorldRenderer.prototype;
+CanvasWorldRenderer.prototype._initialize = function() {
+    var canvas = document.createElement("canvas");
+    var me = this;
+    canvas.onclick = function() {
+        me._gol.initialize();
+    };
+    canvas.width = 640;
+    canvas.height = 640;
+    this._cwidth = canvas.width / this._gol.width;
+    this._cheight = canvas.height / this._gol.height;
+    console.log("canvas:  (" + canvas.width + ", " + canvas.height + ")"); 
+    console.log("cells:  (" + this._cwidth + ", " + this._cheight + ")"); 
+    document.body
+    document.body.appendChild(canvas);
+    this._canvas = canvas;
+    this._ctx = canvas.getContext('2d');
+}; 
+CanvasWorldRenderer.prototype._preRender = function() {
+    this._ctx.save();
+    this._ctx.fillStyle = "white";
+    this._ctx.fillRect(0, 0, this._canvas.width, this._canvas.height);
+    this._ctx.restore();
+};
+CanvasWorldRenderer.prototype._renderCell = function(val, x, y) {
+    this._ctx.save();
+    this._ctx.beginPath();
+    this._ctx.moveTo(x * this._cwidth, y * this._cheight);
+    this._ctx.lineTo((x+1) * this._cwidth, y * this._cheight);
+    this._ctx.lineTo((x+1) * this._cwidth, (y+1) * this._cheight);
+    this._ctx.lineTo(x * this._cwidth, (y+1) * this._cheight);
+    this._ctx.lineTo(x * this._cwidth, y * this._cheight);
+    this._ctx.closePath();
+    this._ctx.stroke();
+    this._ctx.fillStyle = "teal";
+    this._ctx.fill();
+    this._ctx.restore();
+};
+CanvasWorldRenderer.prototype.clear = function() {
+    document.body.removeChild(this._canvas);
+    this._canvas = null;
+    this._ctx = null;
+};
