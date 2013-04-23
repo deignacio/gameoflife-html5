@@ -12,6 +12,7 @@ define(function(require) {
         var renderer = null;
         var killLineageId = -1;
         var generationId = -1;
+        var minPopulation = -1;
         var maxLineageRuntime = 10000;
         var maxWorldRuntime = 30000;
         var oneLineage = function() {
@@ -27,13 +28,14 @@ define(function(require) {
             gol = new GameOfLife({"size": worldSize});
             renderer = new RendererFactory({world: gol, divId: "gol"});
             stats = {"genCount": 0, "cellCount": gol.populationSize};
+            minPopulation = gol.cellCount * 0.01;
             var oneGeneration = function() {
                 gol.nextGeneration();
                 renderer.render();
                 stats.genCount++;
                 stats.cellCount = gol.populationSize;
                 if (runLineage) {
-                    if (gol.populationSize > 0) {
+                    if (gol.populationSize > minPopulation) {
                         generationId = setTimeout(oneGeneration, 50);
                     } else {
                         if (killLineageId != -1) {

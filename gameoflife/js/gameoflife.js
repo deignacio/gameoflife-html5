@@ -15,7 +15,7 @@ define(function(require) {
             this.size = ("size" in args) ? args.size : "medium";
             this.height = enums.GameOfLifeSizes[this.size].height;
             this.width = enums.GameOfLifeSizes[this.size].width;
-            this._cellCount = this.height * this.width;
+            this.cellCount = this.height * this.width;
             this._initialProbability = ("initialProbability" in args) ? args.initialProbability : "average";
             this.initialize();
         },
