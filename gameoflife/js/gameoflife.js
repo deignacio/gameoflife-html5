@@ -27,10 +27,13 @@ GameOfLife.prototype = {
         this.width = GameOfLifeSizes[this.size].width;
         this._cellCount = this.height * this.width;
         this._initialProbability = ("initialProbability" in args) ? args.initialProbability : "average";
-        var initialProbability = GameOfLifeProbabilities[this._initialProbability];
-        this._randomize(initialProbability);
+        this.initialize();        
     },
 
+    initialize: function() {
+        var initialProbability = GameOfLifeProbabilities[this._initialProbability];
+        this._randomize(initialProbability);    
+    },
 
     _resetRows: function() {
         this._rows = [];

@@ -44,7 +44,11 @@ TextDumpWorldRenderer.prototype._renderCell = function(val, x, y) {
     this._cells.push("(" + x + ", " + y + ")");
 };
 TextDumpWorldRenderer.prototype._postRender = function() {
-    setMsg(this._divId, this._cells);
+    var d = document.getElementById(this._divId);
+    while (d.hasChildNodes()) {
+        d.removeChild(d.childNodes[0]);
+    }
+    d.appendChild(document.createTextNode(this._cells));    
 };
 TextDumpWorldRenderer.prototype.clear = function() {
     this._cells = [];
