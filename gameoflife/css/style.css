@@ -9,7 +9,8 @@
 
 #gol {
     overflow: hidden;
-    height: 350px;
+    height: 640px;
+    width: 640px;
 }
 
 body {
