@@ -5,14 +5,11 @@
 #stats {
     overflow: scroll;
     height: 150px;
+    width: 640px;
 }
 
 #gol {
     overflow: hidden;
     height: 640px;
     width: 640px;
-}
-
-body {
-    padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
 }

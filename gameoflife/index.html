@@ -9,7 +9,7 @@
         <link href="css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
     </head>
     <body>
-        <div class="navbar navbar-inverse navbar-fixed-top">
+<!--         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
                     <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -21,11 +21,11 @@
                     <div class="nav-collapse collapse">
                         <ul class="nav">
                         </ul>
-                    </div><!--/.nav-collapse -->
+                    </div>
                 </div>
             </div>
         </div>
-
+ -->
         <div id="header" class="container">
             <div class="row span12">
                 <div class="span6">
@@ -38,6 +38,7 @@
                         </ul>
                     </div>
                 </div>
+                <!--
                 <div class="span4">
                     <h4> world sizes </h4>
                     <button class="gol-start btn btn-info" data-world-size="small">small <small>(16x16)</small></button>
@@ -45,13 +46,11 @@
                     <button class="gol-start btn btn-info" data-world-size="large">large <small>(128x128)</small></button>
                     <button class="gol-start btn btn-info" data-world-size="xlarge">xlarge <small>(256x256)</small></button>
                 </div>
+                -->
             </div>
         </div>
         <div id="gol-container" class="container">
-            <div id="gol" class="row alert alert-info"></div>
-        </div>
-        <div id="footer" class="container">
-            <div id="stats" class="row alert alert-warning"></div>
+            <canvas id="gol" style="overflow:hidden;"></canvas>
         </div>
 
         <!-- end of the content, add scripts -->
